@@ -1,0 +1,41 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
+  }
+}
+
+group 'com.github.pierry'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+
+bootJar {
+  baseName = 'gs-rest-service'
+  version = '0.1.0'
+}
+
+repositories {
+  mavenCentral()
+  maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+}
+
+dependencies {
+  compile("org.springframework.boot:spring-boot-starter-web")
+  compile("com.google.code.gson:gson:2.8.5")
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+  compile("org.springframework.boot:spring-boot-starter-data-jpa")
+  compile("org.hibernate:hibernate-core:5.3.5.Final")
+  compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.7.Final'
+
+  compile fileTree(dir: 'libs', include: '*.jar')
+}
